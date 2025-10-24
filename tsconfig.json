@@ -2,5 +2,66 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./frontend/question-module"
+    },
+    {
+      "path": "./frontend/resume-module"
+    },
+    {
+      "path": "./frontend/simulator-module"
+    },
+    {
+      "path": "./frontend/dashboard-module"
+    },
+    {
+      "path": "./backend/resume-feedback-service-e2e"
+    },
+    {
+      "path": "./backend/resume-feedback-service"
+    },
+    {
+      "path": "./backend/question-generator-service-e2e"
+    },
+    {
+      "path": "./backend/question-generator-service"
+    },
+    {
+      "path": "./backend/interview-simulator-service-e2e"
+    },
+    {
+      "path": "./backend/interview-simulator-service"
+    },
+    {
+      "path": "./backend/user-tracker-service-e2e"
+    },
+    {
+      "path": "./backend/user-tracker-service"
+    },
+    {
+      "path": "./backend/api-gateway-e2e"
+    },
+    {
+      "path": "./backend/api-gateway"
+    },
+    {
+      "path": "./ui"
+    },
+    {
+      "path": "./libs/ui"
+    },
+    {
+      "path": "./libs/types"
+    },
+    {
+      "path": "./libs/utils"
+    },
+    {
+      "path": "./libs/ai-prompts"
+    },
+    {
+      "path": "./libs/services"
+    }
+  ]
 }
