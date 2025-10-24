@@ -1,0 +1,26 @@
+{
+  "name": "@interview-genius/interview-simulator-service-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@interview-genius/interview-simulator-service"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "backend/interview-simulator-service-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@interview-genius/interview-simulator-service:build",
+          "@interview-genius/interview-simulator-service:serve"
+        ]
+      }
+    }
+  }
+}
