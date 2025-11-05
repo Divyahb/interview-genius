@@ -1,0 +1,107 @@
+{
+  "name": "resume",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "resume",
+    "targets": {
+      "build": {
+        "executor": "@nx/webpack:webpack",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "defaultConfiguration": "production",
+        "options": {
+          "compiler": "babel",
+          "outputPath": "frontend/resume/dist",
+          "index": "frontend/resume/src/index.html",
+          "baseHref": "/",
+          "main": "frontend/resume/src/main.ts",
+          "tsConfig": "frontend/resume/tsconfig.app.json",
+          "assets": [
+            "frontend/resume/src/favicon.ico",
+            "frontend/resume/src/assets"
+          ],
+          "styles": [
+            "frontend/resume/src/styles.css"
+          ],
+          "scripts": [],
+          "webpackConfig": "frontend/resume/webpack.config.ts",
+          "postcssConfig": "frontend/resume/postcss.config.js"
+        },
+        "configurations": {
+          "development": {
+            "extractLicenses": false,
+            "optimization": false,
+            "sourceMap": true,
+            "vendorChunk": true
+          },
+          "production": {
+            "fileReplacements": [
+              {
+                "replace": "frontend/resume/src/environments/environment.ts",
+                "with": "frontend/resume/src/environments/environment.prod.ts"
+              }
+            ],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "webpackConfig": "frontend/resume/webpack.config.prod.ts"
+          }
+        },
+        "dependsOn": [
+          "^build",
+          "typecheck"
+        ]
+      },
+      "serve": {
+        "executor": "@nx/react:module-federation-dev-server",
+        "defaultConfiguration": "development",
+        "options": {
+          "buildTarget": "resume:build",
+          "hmr": true,
+          "port": 4202
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "resume:build:development"
+          },
+          "production": {
+            "buildTarget": "resume:build:production",
+            "hmr": false
+          }
+        },
+        "dependsOn": [
+          "typecheck"
+        ]
+      },
+      "serve-static": {
+        "executor": "@nx/react:module-federation-static-server",
+        "defaultConfiguration": "production",
+        "options": {
+          "serveTarget": "resume:serve"
+        },
+        "configurations": {
+          "development": {
+            "serveTarget": "resume:serve:development"
+          },
+          "production": {
+            "serveTarget": "resume:serve:production"
+          }
+        }
+      }
+    }
+  },
+  "exports": {
+    "./Module": {
+      "@interview-genius/source": "./src/remote-entry.ts",
+      "types": "./src/remote-entry.ts",
+      "import": "./src/remote-entry.ts",
+      "default": "./src/remote-entry.ts"
+    }
+  },
+  "types": "./src/remote-entry.ts"
+}

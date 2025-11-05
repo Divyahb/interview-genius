@@ -1,0 +1,107 @@
+{
+  "name": "search",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "search",
+    "targets": {
+      "build": {
+        "executor": "@nx/webpack:webpack",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "defaultConfiguration": "production",
+        "options": {
+          "compiler": "babel",
+          "outputPath": "frontend/search/dist",
+          "index": "frontend/search/src/index.html",
+          "baseHref": "/",
+          "main": "frontend/search/src/main.ts",
+          "tsConfig": "frontend/search/tsconfig.app.json",
+          "assets": [
+            "frontend/search/src/favicon.ico",
+            "frontend/search/src/assets"
+          ],
+          "styles": [
+            "frontend/search/src/styles.css"
+          ],
+          "scripts": [],
+          "webpackConfig": "frontend/search/webpack.config.ts",
+          "postcssConfig": "frontend/search/postcss.config.js"
+        },
+        "configurations": {
+          "development": {
+            "extractLicenses": false,
+            "optimization": false,
+            "sourceMap": true,
+            "vendorChunk": true
+          },
+          "production": {
+            "fileReplacements": [
+              {
+                "replace": "frontend/search/src/environments/environment.ts",
+                "with": "frontend/search/src/environments/environment.prod.ts"
+              }
+            ],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "webpackConfig": "frontend/search/webpack.config.prod.ts"
+          }
+        },
+        "dependsOn": [
+          "^build",
+          "typecheck"
+        ]
+      },
+      "serve": {
+        "executor": "@nx/react:module-federation-dev-server",
+        "defaultConfiguration": "development",
+        "options": {
+          "buildTarget": "search:build",
+          "hmr": true,
+          "port": 4201
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "search:build:development"
+          },
+          "production": {
+            "buildTarget": "search:build:production",
+            "hmr": false
+          }
+        },
+        "dependsOn": [
+          "typecheck"
+        ]
+      },
+      "serve-static": {
+        "executor": "@nx/react:module-federation-static-server",
+        "defaultConfiguration": "production",
+        "options": {
+          "serveTarget": "search:serve"
+        },
+        "configurations": {
+          "development": {
+            "serveTarget": "search:serve:development"
+          },
+          "production": {
+            "serveTarget": "search:serve:production"
+          }
+        }
+      }
+    }
+  },
+  "exports": {
+    "./Module": {
+      "@interview-genius/source": "./src/remote-entry.ts",
+      "types": "./src/remote-entry.ts",
+      "import": "./src/remote-entry.ts",
+      "default": "./src/remote-entry.ts"
+    }
+  },
+  "types": "./src/remote-entry.ts"
+}
