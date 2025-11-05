@@ -1,90 +1,95 @@
-# InterviewGenius
+# Interview Genius
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This is a project for the Interview Genius community. It's a multi-project application built using the [Nx](https://nx.dev) framework and the [Micro Frontends](https://micro-frontends.org/) architecture.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Tech Stack
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+This project uses the following technologies:
 
-## Finish your CI setup
+- TypeScript
+- NestJS (for the backend services)
+- React (with Typescript) for the frontend applications
+- Tailwind CSS for styling
+- Google GenAI for AI-powered prompts
+- [Nx](https://nx.dev) for managing the monorepo and generating the apps and microfrontends
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/Jw6DJx6zEG)
+## Project Structure
 
+This project is structured into the following directories:
 
-## Generate a library
+- `libs`: This directory contains all the shared libraries used by the frontend and backend applications. Each library is a separate Nx library, with its own source code, tests, and build configuration.
+- `apps`: This directory contains the top-level applications.
+  - `shell`: This is the main application shell.
+- `microfrontends`: This directory contains the microfrontends.
+  - `resume`: This is the resume microfrontend.
+  - `search`: This is the search microfrontend.
+  - `simulator`: This is the simulator microfrontend.
+  - `dashboard`: This is the dashboard microfrontend.
+- `backend`: This directory contains the backend services.
+  - `resume-feedback-service`: This service handles feedback on resumes.
+  - `interview-simulator-service`: This service simulates interviews.
+  - `question-generator-service`: This service generates interview questions.
+  - `user-tracker-service`: This service tracks user activity.
+  - `api-gateway`: This service acts as a reverse proxy to the other services.
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+## Running the Application
+
+To run the application, you can use the following commands:
+
+```bash
+# Install dependencies
+npm install
+
+# Run all the services and applications
+npm run dev:all
+
+# Run the backend services
+npm run dev:backend
+
+# Run the frontend applications
+npm run dev:frontend
+
 ```
 
-## Run tasks
+You can also run individual services or applications by using the npm run dev:<service/application> command.
 
-To build the library use:
+## Generating Apps and Microfrontends
 
-```sh
-npx nx build pkg1
-```
+To generate a new app or microfrontend, you can use the following commands:
 
-To run any task with Nx use:
+```bash
+# Generate a new app
+nx generate @nrwl/nest:app my-app
 
-```sh
-npx nx <target> <project-name>
-```
+# Generate a new microfrontend
+nx generate @nx/react:microfrontend my-mf --project=my-app
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
+# Generate a new library
+nx generate @nrwl/nest:lib my-lib --project=my-app
 
 ```
-npx nx release
+
+You can also generate a new microfrontend using the @nx/react/microfrontend schematics. For example, to generate a new microfrontend with a remote entry file and a remote shell, you can use the following command:
+
+```bash
+nx generate @nx/react:microfrontend my-mf --project=my-app --remoteEntryFile=true --shell=remote
+
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+For more information on generating apps and microfrontends with Nx, see the Nx documentation.
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Backend Services
 
-## Keep TypeScript project references up to date
+The backend services are implemented using NestJS and are located in the backend directory. Each service has its own source code, tests, and build configuration. The services are:
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+**resume-feedback-service**: This service handles feedback on resumes.
+**interview-simulator-service**: This service simulates interviews.
+**question-generator-service**: This service generates interview questions.
+**user-tracker-service**: This service tracks user activity.
+**api-gateway**: This service acts as a reverse proxy to the other services.
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+For more information on the backend services, see the backend README.
 
-```sh
-npx nx sync
-```
+## Contributing
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Contributions are welcome! Please see the contributing guidelines for more information.

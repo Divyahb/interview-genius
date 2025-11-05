@@ -16,6 +16,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@interview-genius/source"]
+    "customConditions": ["@interview-genius/source"],
+    "baseUrl": "."
   }
 }
